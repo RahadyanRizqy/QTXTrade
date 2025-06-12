@@ -50,9 +50,6 @@ def parse_trade_signal(text: str):
     signals = []
 
     main_match = re.search(r"([A-Z]{3}/[A-Z]{3});(\d{2}:\d{2});(NAIK|TURUN)", text)
-    if not main_match:
-        print("❌ Format sinyal utama tidak dikenali.")
-        return []
 
     pair = main_match.group(1)
     base_time = convert_to_gmt7(main_match.group(2))
@@ -182,9 +179,7 @@ async def handler(event):
         message = event.message.message
 
         signals = parse_trade_signal(message)
-        print(f"\n📩 Pesan baru diterima")
-        emoji = "📉" if signals[0].direction == "TURUN" else "📈"
-        print(f"{signals[0].pair} {emoji} {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+
         filtered = []
 
         for s in signals:
@@ -195,7 +190,10 @@ async def handler(event):
             filtered.append(s)
 
         signal_queue.extend(filtered)
-        print(f"📥 Queue sekarang: {[f'{s.pair}-{s.time}-idx{s.index}' for s in signal_queue]}")
+        print(f"\n📩 Pesan baru diterima {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        emoji = "🟥" if signals[0].direction == "TURUN" else "🟩"
+        print(f"{signals[0].pair} {emoji}")
+        print(f"📥 Queue sekarang: {[f'{s.pair}-{s.time}-idx{s.index}' for s in signal_queue]}\n")
         await klik_pair(filtered[0])
 
 async def print_time_loop():
