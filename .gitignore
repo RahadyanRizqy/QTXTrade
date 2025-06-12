@@ -1,0 +1,7 @@
+.venv/
+chrome_profile
+selenium
+.env
+state.json
+*.session
+byqueue.py
