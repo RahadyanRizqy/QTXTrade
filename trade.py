@@ -182,14 +182,9 @@ async def handler(event):
         message = event.message.message
 
         signals = parse_trade_signal(message)
-        print(f"\n📩 Pesan baru diterima di pukul \n{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-        emoji = ""
-        if signals[0].direction == "TURUN":
-            emoji = "📉"
-        
-        else:
-            emoji = "📈"
-        print(f"\n{signals[0].pair} {emoji} {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        print(f"\n📩 Pesan baru diterima\n")
+        emoji = "📉" if signals[0].direction == "TURUN" else "📈"
+        print(f"{signals[0].pair} {emoji} {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         filtered = []
 
         for s in signals:
