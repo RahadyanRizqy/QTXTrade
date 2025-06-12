@@ -141,7 +141,7 @@ async def scheduler_loop():
             target_datetime = now.replace(hour=target_time.hour, minute=target_time.minute, second=0)
 
             # Kurangi 1 detik dari waktu target
-            execute_at = target_datetime - timedelta(seconds=2)
+            execute_at = target_datetime
 
             if now == execute_at:
                 signal_queue.pop(0)
