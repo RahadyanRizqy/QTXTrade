@@ -128,20 +128,6 @@ async def execute_trade(signal: TradeSignal):
 
     is_trading = False
 
-
-# === Scheduler utama ===
-# async def scheduler_loop():
-#     while True:
-#         await asyncio.sleep(1)
-#         now = datetime.now().strftime("%H:%M")
-
-#         if not is_trading and signal_queue:
-#             next_signal = signal_queue[0]
-#             if next_signal.time == now:
-#                 signal_queue.pop(0)
-#                 await execute_trade(next_signal)
-
-
 async def scheduler_loop():
     while True:
         await asyncio.sleep(1)
@@ -234,8 +220,7 @@ async def main():
     await init_browser()
     await asyncio.gather(
         client.run_until_disconnected(), 
-        scheduler_loop(), 
-        print_time_loop())
+        scheduler_loop())
 
 if __name__ == "__main__":
     asyncio.run(main())
