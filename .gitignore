@@ -5,3 +5,5 @@ selenium
 state.json
 *.session
 byqueue.py
+server.py
+templates/
