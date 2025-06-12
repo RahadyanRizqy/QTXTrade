@@ -180,7 +180,7 @@ async def handler(event):
     chat = await event.get_chat()
     if hasattr(chat, 'title') and chat.title == CHANNEL:
         message = event.message.message
-        print(f"\n📩 Pesan baru diterima:\n{message}\n")
+        print(f"\n📩 Pesan baru diterima di pukul \n{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
 
         signals = parse_trade_signal(message)
         filtered = []
