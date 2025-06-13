@@ -194,8 +194,8 @@ async def handler(event):
 
         signal_queue.extend(filtered)
         print(f"\n📩 Pesan baru diterima {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-        emoji = "🟥" if signals[0].direction == "TURUN" else "🟩"
-        print(f"{signals[0].pair} {emoji}")
+        # emoji = "🟥" if signals[0].direction == "TURUN" else "🟩"
+        # print(f"{signals[0].pair} {emoji}")
         print(f"📥 Queue sekarang: {[f'{s.pair}-{s.time}-idx{s.index}' for s in signal_queue]}\n")
         await klik_pair(filtered[0])
 
