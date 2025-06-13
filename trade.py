@@ -50,6 +50,9 @@ def parse_trade_signal(text: str):
     signals = []
 
     main_match = re.search(r"([A-Z]{3}/[A-Z]{3});(\d{2}:\d{2});(NAIK|TURUN)", text)
+    if not main_match:
+        print("❌ Format sinyal utama tidak dikenali.")
+        return []
 
     pair = main_match.group(1)
     base_time = convert_to_gmt7(main_match.group(2))
